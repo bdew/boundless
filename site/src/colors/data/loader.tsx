@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { SpinnerCircularFixed } from 'spinners-react';
 import { ColorViewer } from '../viewer';
 import { DataJson } from './types';
 
@@ -34,7 +35,10 @@ export const DataLoader: React.FC = () => {
             <h1>Something went wrong...</h1>
             <pre>{state.err.stack ? state.err.stack : state.err.message}</pre>
         </>
-        case 'pending': return <h1>Loading...</h1>;
+        case 'pending': return <div className="loading">
+            <SpinnerCircularFixed size="5em" color="blue" />
+            <div>Loading...</div>
+        </div>;
         case 'loaded': return <ColorViewer data={state.data} />
     }
 }
