@@ -1,0 +1,229 @@
+{
+    "items": [
+        {
+            "id": 13,
+            "strId": "GRASS_VERDANT_BASE",
+            "name": "Verdant Grass"
+        },
+        {
+            "id": 3085,
+            "strId": "GRASS_BARBED_BASE",
+            "name": "Barbed Grass"
+        },
+        {
+            "id": 6157,
+            "strId": "GRASS_GNARLED_BASE",
+            "name": "Gnarled Grass"
+        },
+        {
+            "id": 9555,
+            "strId": "CRYSTAL_GLEAM_BASE",
+            "name": "Gleam"
+        },
+        {
+            "id": 9838,
+            "strId": "FLORA_FLOWER_1",
+            "name": "Gladeflower"
+        },
+        {
+            "id": 9839,
+            "strId": "FLORA_FLOWER_2",
+            "name": "Cloneflower"
+        },
+        {
+            "id": 9840,
+            "strId": "FLORA_FLOWER_3",
+            "name": "Spineflower"
+        },
+        {
+            "id": 9841,
+            "strId": "FLORA_FLOWER_4",
+            "name": "Ghostflower"
+        },
+        {
+            "id": 10774,
+            "strId": "FLORA_PLANT_INKY_DUGUP",
+            "name": "Traveller's Perch"
+        },
+        {
+            "id": 10775,
+            "strId": "FLORA_PLANT_FIBROUS_DUGUP",
+            "name": "Trumpet Root"
+        },
+        {
+            "id": 10776,
+            "strId": "PLANT_LOTUS_DUGUP",
+            "name": "Rosetta Nox"
+        },
+        {
+            "id": 10777,
+            "strId": "PLANT_YUCCA_DUGUP",
+            "name": "Desert Sword"
+        },
+        {
+            "id": 10778,
+            "strId": "PLANT_CACTUS_DUGUP",
+            "name": "Spineback Plant"
+        },
+        {
+            "id": 10779,
+            "strId": "PLANT_ALOE_DUGUP",
+            "name": "Twisted Aloba"
+        },
+        {
+            "id": 10780,
+            "strId": "PLANT_SNOWDROP_DUGUP",
+            "name": "Stardrop Plant"
+        },
+        {
+            "id": 10781,
+            "strId": "PLANT_FIDDLEHEAD_DUGUP",
+            "name": "Oortian's Staff"
+        },
+        {
+            "id": 10788,
+            "strId": "FUNGUS_AMANITA_DUGUP",
+            "name": "Mottled Tar Spot Fungus"
+        },
+        {
+            "id": 10789,
+            "strId": "FUNGUS_BRACKET_DUGUP",
+            "name": "Clustered Tongue Fungus"
+        },
+        {
+            "id": 10790,
+            "strId": "FUNGUS_CORAL_DUGUP",
+            "name": "Branch Funnel Fungus"
+        },
+        {
+            "id": 10791,
+            "strId": "FUNGUS_SCATTER_DUGUP",
+            "name": "Tinted-Burst Fungus"
+        },
+        {
+            "id": 10792,
+            "strId": "FUNGUS_DRIPPING_DUGUP",
+            "name": "Weeping Waxcap Fungus"
+        },
+        {
+            "id": 10793,
+            "strId": "FUNGUS_GLOWING_DUGUP",
+            "name": "Glow Cap Fungus"
+        },
+        {
+            "id": 10794,
+            "strId": "ROCK_METAMORPHIC_BASE_DUGUP",
+            "name": "Metamorphic Rock"
+        },
+        {
+            "id": 10798,
+            "strId": "ROCK_IGNEOUS_BASE_DUGUP",
+            "name": "Igneous Rock"
+        },
+        {
+            "id": 10802,
+            "strId": "ROCK_SEDIMENTARY_BASE_DUGUP",
+            "name": "Sedimentary Rock"
+        },
+        {
+            "id": 10806,
+            "strId": "ICE_GLACIER_BASE_DUGUP",
+            "name": "Glacier"
+        },
+        {
+            "id": 10810,
+            "strId": "SAND_DEFAULT_BASE_DUGUP",
+            "name": "Sand"
+        },
+        {
+            "id": 10814,
+            "strId": "GRAVEL_DEFAULT_BASE_DUGUP",
+            "name": "Gravel"
+        },
+        {
+            "id": 10818,
+            "strId": "WOOD_LUSH_LEAVES_DUGUP",
+            "name": "Lush Foliage"
+        },
+        {
+            "id": 10822,
+            "strId": "WOOD_EXOTIC_LEAVES_DUGUP",
+            "name": "Exotic Foliage"
+        },
+        {
+            "id": 10826,
+            "strId": "WOOD_WAXY_LEAVES_DUGUP",
+            "name": "Waxy Foliage"
+        },
+        {
+            "id": 10830,
+            "strId": "WOOD_ANCIENT_TRUNK_DUGUP",
+            "name": "Ancient Wood Trunk"
+        },
+        {
+            "id": 10834,
+            "strId": "WOOD_TWISTED_TRUNK_DUGUP",
+            "name": "Twisted Wood Trunk"
+        },
+        {
+            "id": 10838,
+            "strId": "WOOD_LUSTROUS_TRUNK_DUGUP",
+            "name": "Lustrous Wood Trunk"
+        },
+        {
+            "id": 10842,
+            "strId": "ICE_DEFAULT_BASE_DUGUP",
+            "name": "Ice"
+        },
+        {
+            "id": 10846,
+            "strId": "MUD_DEFAULT_BASE_DUGUP",
+            "name": "Mud"
+        },
+        {
+            "id": 10850,
+            "strId": "ASH_DEFAULT_BASE_DUGUP",
+            "name": "Ash"
+        },
+        {
+            "id": 10854,
+            "strId": "SPONGE_DEFAULT_BASE_DUGUP",
+            "name": "Sponge"
+        },
+        {
+            "id": 10858,
+            "strId": "TANGLE_DEFAULT_BASE_DUGUP",
+            "name": "Tangle"
+        },
+        {
+            "id": 10862,
+            "strId": "THORNS_DEFAULT_BASE_DUGUP",
+            "name": "Thorns"
+        },
+        {
+            "id": 10866,
+            "strId": "MOULD_DEFAULT_BASE_DUGUP",
+            "name": "Mould"
+        },
+        {
+            "id": 10870,
+            "strId": "GROWTH_DEFAULT_BASE_DUGUP",
+            "name": "Growth"
+        },
+        {
+            "id": 11584,
+            "strId": "SOIL_SILTY_BASE_DUGUP",
+            "name": "Silty Soil"
+        },
+        {
+            "id": 11588,
+            "strId": "SOIL_CLAY_BASE_DUGUP",
+            "name": "Clay Soil"
+        },
+        {
+            "id": 11592,
+            "strId": "SOIL_PEATY_BASE_DUGUP",
+            "name": "Peaty Soil"
+        }
+    ]
+}
