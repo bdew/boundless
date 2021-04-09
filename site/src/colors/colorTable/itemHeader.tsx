@@ -1,6 +1,7 @@
 import React from "react";
 import { createUseStyles } from "react-jss";
 import { ItemEntry } from "../data/types";
+import { itemImage } from "../data/items";
 
 interface ItemProps {
     rowSpan?: number;
@@ -11,7 +12,7 @@ interface ItemProps {
 const useStyles = createUseStyles({
     cell: {
         maxWidth: "8em",
-        padding: "0 12px",
+        padding: "0 12px !important",
     },
     withImage: {
         display: "flex",
@@ -26,15 +27,11 @@ const useStyles = createUseStyles({
     },
 });
 
-function imageUrl(id: string): string {
-    return `/data/img/${id}.png`;
-}
-
 export const ItemHeader: React.FC<ItemProps> = ({ rowSpan, item, name }) => {
     const classes = useStyles();
     return <th rowSpan={rowSpan} className={classes.cell}>
         <div className={classes.withImage}>
-            <img className={classes.icon} src={imageUrl(item.strId)} />
+            <img className={classes.icon} src={itemImage(item)} />
             <div>{name || item.name}</div>
         </div>
     </th>;

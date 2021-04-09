@@ -14,3 +14,7 @@ export function getItem(id: string | number): ItemEntry {
     if (!e) throw new Error(`Mapping for item ${id} not found`);
     return e;
 }
+
+export function itemImage(item: ItemEntry): string {
+    return `/data/img/${item.strId}.png`;
+}

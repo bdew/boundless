@@ -25,16 +25,16 @@ const useStyles = createUseStyles({
 export const Layout: React.FC = ({ children }) => {
     const classes = useStyles();
     return <div className={classes.wrapper}>
-        <div className={classes.scrolling}>
-            {children}
-            <Footer />
-        </div>
+        {children}
     </div>;
 };
 
 export const Content: React.FC = ({ children }) => {
     const classes = useStyles();
-    return <div className={classes.content}>
-        {children}
+    return <div className={classes.scrolling}>
+        <div className={classes.content}>
+            {children}
+        </div>
+        <Footer />
     </div>;
 };

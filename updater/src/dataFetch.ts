@@ -44,13 +44,18 @@ export async function getColors(): Promise<ColorEntry[]> {
     const colors: Color[] = await fetchPaged('https://api.boundlexx.app/api/v1/colors/?limit=256', COLORS_TTL);
     console.log(`Loaded ${colors.length} colors`);
 
-    return colors.map(e => ({
-        id: e.game_id,
-        name: e.localization.find(x => x.lang === 'english')?.name || '?',
-        color: e.base_color,
-        gleam: e.gleam_color,
-        light: new ColorApi(e.base_color).isLight()
-    }));
+    return colors.map(e => {
+        const color = new ColorApi(e.base_color);
+        return {
+            id: e.game_id,
+            name: e.localization.find(x => x.lang === 'english')?.name || '?',
+            color: e.base_color,
+            gleam: e.gleam_color,
+            light: color.isLight(),
+            rgb: [color.red(), color.green(), color.blue()],
+            hsv: [Math.round(color.hue()), Math.round(color.saturationv()), Math.round(color.value())],
+        }
+    });
 }
 
 function coloredItemIds(worlds: WorldEntry[]): Set<number> {

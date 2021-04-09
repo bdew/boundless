@@ -27,7 +27,7 @@ module.exports = {
     "react-hooks/exhaustive-deps": "warn",
     "quotes": ["warn", "double"],
     "semi": ["warn", "always"],
-    "comma-dangle": ["warn", "always-multiline"],
+    "comma-dangle": ["warn", { functions: "never", arrays: "always-multiline", objects: "always-multiline", imports: "always-multiline", exports: "always-multiline" }],
   },
   ignorePatterns: [
     "**/*.css", "**/*.json"

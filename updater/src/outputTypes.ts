@@ -6,6 +6,8 @@ export interface ColorEntry {
     gleam: string;
     name: string;
     light: boolean;
+    rgb: [number,number,number];
+    hsv: [number,number,number];
 }
 
 export interface WorldColors {

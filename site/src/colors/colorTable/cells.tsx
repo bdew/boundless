@@ -8,15 +8,15 @@ interface Props {
     columns: ItemColumn[];
     colors: Map<number, ColorEntry>;
     blocks: WorldColors;
-
+    colorDetails: (id: number)=>void;
 }
 
-export const ColorCells: React.FC<Props> = ({ columns, colors, blocks }) => {
+export const ColorCells: React.FC<Props> = ({ columns, colors, blocks, colorDetails }) => {
     const colElems = useMemo(() =>
         columnsToDefs(columns).map(col =>
-            <ColorCell key={col.id} colors={colors} blocks={blocks} type={col.id.toString()} />
+            <ColorCell key={col.id} colors={colors} blocks={blocks} type={col.id.toString()} colorDetails={colorDetails} />
         )
-        , [columns, colors, blocks]);
+        , [columns, colors, blocks, colorDetails]);
 
     return <>{colElems}</>;
 };

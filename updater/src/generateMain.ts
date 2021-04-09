@@ -11,7 +11,7 @@ async function doExport(): Promise<void> {
         worlds: await getWorlds(),
     }
 
-    await fs.writeFile('out/colors.json', JSON.stringify(output, null, 4));
+    await fs.writeFile('out/colors.json', JSON.stringify(output));
 }
 
 doExport().then(() => console.log('All done')).catch(err => console.error(err));

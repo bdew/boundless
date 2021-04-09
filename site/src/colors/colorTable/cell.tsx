@@ -7,6 +7,7 @@ interface Props {
     colors: Map<number, ColorEntry>;
     blocks: WorldColors;
     type: string;
+    colorDetails: (id: number)=>void;
 }
 
 const useStyles = createUseStyles({
@@ -15,6 +16,7 @@ const useStyles = createUseStyles({
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
+        cursor: "pointer",
     },
     light: {
         color: "black",
@@ -24,7 +26,7 @@ const useStyles = createUseStyles({
     },
 });
 
-export const ColorCell: React.FC<Props> = ({ colors, blocks, type }) => {
+export const ColorCell: React.FC<Props> = ({ colors, blocks, type, colorDetails }) => {
     const classes = useStyles();
 
     const myColor = useMemo(() => {
@@ -33,7 +35,13 @@ export const ColorCell: React.FC<Props> = ({ colors, blocks, type }) => {
     }, [colors, blocks, type]);
 
     if (myColor)
-        return <td className={clsx(classes.cell, myColor.light ? classes.light : classes.dark)} style={{ backgroundColor: myColor.color }}>{myColor.name}</td>;
+        return <td
+            className={clsx(classes.cell, myColor.light ? classes.light : classes.dark)}
+            style={{ backgroundColor: myColor.color }}
+            onClick={() => colorDetails(myColor.id)}
+        >
+            {myColor.name}
+        </td>;
     else
         return <td>-</td>;
 };

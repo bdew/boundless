@@ -45,6 +45,10 @@ export const ColorViewer: React.FC<Props> = ({ colors, worlds }) => {
         history.push(`/colors/${wclass}/${group}${region ? "/" + region : ""}`);
     }, [history]);
 
+    const colorDetails = useCallback((id: number) => {
+        history.push(`/colors/details/${id}?back=/colors/${wclass}/${group}${region ? "/" + region : ""}`);
+    }, [history, wclass, group, region]);
+
     const columns = useMemo(() => {
         switch (group) {
             case "rocks": return RockColumns;
@@ -79,7 +83,7 @@ export const ColorViewer: React.FC<Props> = ({ colors, worlds }) => {
                 />
             </Header>
             <Content>
-                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} />
+                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} />
             </Content>
         </Layout>
     </>;

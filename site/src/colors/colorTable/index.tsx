@@ -10,6 +10,7 @@ interface Props {
     columns: ItemColumn[];
     colors: Map<number, ColorEntry>;
     worlds: WorldEntry[];
+    colorDetails: (id: number)=>void;
 }
 
 const useStyles = createUseStyles({
@@ -41,7 +42,7 @@ const useStyles = createUseStyles({
     },
 });
 
-export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds }) => {
+export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails }) => {
     const classes = useStyles();
     return <table className={classes.table}>
         <thead>
@@ -62,7 +63,7 @@ export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds }
                 <td className={classes.worldName} title={world.name}>{world.name}</td>
                 <td>{world.type.toString().charAt(0).toUpperCase() + world.type.toString().slice(1).toLowerCase()}</td>
                 {!region && <td>{world.region.toUpperCase()}</td>}
-                <ColorCells blocks={world.colors} colors={colors} columns={columns} />
+                <ColorCells blocks={world.colors} colors={colors} columns={columns} colorDetails={colorDetails} />
             </tr>)}
         </tbody>
     </table>;
