@@ -1,70 +1,90 @@
-import React from "react";
-import { createUseStyles } from "react-jss";
-import { ColorCells } from "./cells";
+import React, { useCallback, useMemo } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { ColorEntry, WorldClass, WorldEntry, WorldRegion } from "../data/types";
-import { ItemColumn } from "../grouping";
-import { ColumnHeaders, ColumnSubHeaders } from "./headers";
+import { SoilColumns, PlantColumns, RockColumns, WoodColumns, ShroomColumns } from "../grouping";
+import { Switcher } from "../../misc/switcher";
+import { ColorsTable } from "./table";
+import { Header } from "../../misc/header";
+import { Layout, Content } from "../../misc/layout";
+
+type DisplayClass = "main" | "sov";
+type DisplayGroup = "rocks" | "soil" | "trees" | "plants" | "shrooms";
 
 interface Props {
-    region?: WorldRegion;
-    columns: ItemColumn[];
     colors: Map<number, ColorEntry>;
     worlds: WorldEntry[];
-    colorDetails: (id: number)=>void;
 }
 
-const useStyles = createUseStyles({
-    table: {
-        tableLayout: "fixed",
-        fontSize: "0.75em",
-        fontWeight: 500,
-        borderSpacing: 0,
-        cursor: "default",
-        textAlign: "left",
-        "& th, td": {
-            border: "solid #ccc 1px",
-            padding: "2px",
-        },
-        "& tr:hover td": {
-            borderBottom: "solid red 1px",
-            borderTop: "solid red 1px",
-            backgroundColor: "#ccc",
-        },
-    },
-    worldName: {
-        maxWidth: "8em",
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
-    },
-    worldTier: {
-        textAlign: "center",
-    },
-});
+interface Params {
+    wclass: DisplayClass;
+    group: DisplayGroup;
+    region: WorldRegion;
+}
 
-export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails }) => {
-    const classes = useStyles();
-    return <table className={classes.table}>
-        <thead>
-            <tr>
-                <th className={classes.worldTier} rowSpan={2}>T</th>
-                <th className={classes.worldName} rowSpan={2}>World</th>
-                <th rowSpan={2}>Type</th>
-                {!region && <th rowSpan={2}>Region</th>}
-                <ColumnHeaders columns={columns} />
-            </tr>
-            <tr>
-                <ColumnSubHeaders columns={columns} />
-            </tr>
-        </thead>
-        <tbody>
-            {worlds.map(world => <tr key={world.id}>
-                <td className={classes.worldTier}>{world.tier + 1}{world.class === WorldClass.Exoworld ? "X" : ""}</td>
-                <td className={classes.worldName} title={world.name}>{world.name}</td>
-                <td>{world.type.toString().charAt(0).toUpperCase() + world.type.toString().slice(1).toLowerCase()}</td>
-                {!region && <td>{world.region.toUpperCase()}</td>}
-                <ColorCells blocks={world.colors} colors={colors} columns={columns} colorDetails={colorDetails} />
-            </tr>)}
-        </tbody>
-    </table>;
+export const ColorTable: React.FC<Props> = ({ colors, worlds }) => {
+    const { wclass, group, region } = useParams<Params>();
+
+    const filtered = useMemo(() => {
+        let data = worlds;
+
+        if (wclass === "sov")
+            data = data.filter(x => x.class === WorldClass.Sovereign);
+        else
+            data = data.filter(x => x.class === WorldClass.Homeworld || x.class === WorldClass.Exoworld);
+
+        if (region) data = data.filter(x => x.region === region);
+
+        data = data.sort((a, b) => (a.tier - b.tier) || a.name.localeCompare(b.name));
+
+        return data;
+    }, [worlds, wclass, region]);
+
+    const history = useHistory();
+
+    const setDisplay = useCallback((wclass: DisplayClass, group: string, region: WorldRegion | null) => {
+        history.push(`/colors/${wclass}/${group}${region ? "/" + region : ""}`);
+    }, [history]);
+
+    const colorDetails = useCallback((id: number) => {
+        history.push(`/colors/details/${id}?back=/colors/${wclass}/${group}${region ? "/" + region : ""}`);
+    }, [history, wclass, group, region]);
+
+    const columns = useMemo(() => {
+        switch (group) {
+            case "rocks": return RockColumns;
+            case "plants": return PlantColumns;
+            case "trees": return WoodColumns;
+            case "soil": return SoilColumns;
+            case "shrooms": return ShroomColumns;
+            default: return [];
+        }
+    }, [group]);
+
+    return <>
+        <Layout>
+            <Header title="Boundless Color Viewer">
+                <Switcher<DisplayGroup>
+                    name="Type:"
+                    value={group || "rocks"}
+                    setValue={g => setDisplay(wclass, g, region)}
+                    options={[["rocks", "Rocks"], ["soil", "Soil"], ["trees", "Trees"], ["plants", "Plants"], ["shrooms", "Mushrooms"]]}
+                />
+                <Switcher
+                    name="Region:"
+                    value={region || null}
+                    setValue={r => setDisplay(wclass, group, r)}
+                    options={[[null, "All"], [WorldRegion.EUC, "EUC"], [WorldRegion.USE, "USE"], [WorldRegion.USW, "USW"], [WorldRegion.AUS, "AUS"]]}
+                />
+                <Switcher<DisplayClass>
+                    name="Class:"
+                    value={wclass || "main"}
+                    setValue={c => setDisplay(c, group, region)}
+                    options={[["main", "Home/Exo"], ["sov", "Sovereign"]]}
+                />
+            </Header>
+            <Content>
+                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} />
+            </Content>
+        </Layout>
+    </>;
 };

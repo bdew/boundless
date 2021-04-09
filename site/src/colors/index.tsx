@@ -5,7 +5,7 @@ import { SpinnerCircularFixed } from "spinners-react";
 import { Header } from "../misc/header";
 import { Content, Layout } from "../misc/layout";
 import { useLoadedData } from "./data/loader";
-import { ColorViewer } from "./colorViewer";
+import { ColorTable } from "./colorTable";
 import { ColorDetails } from "./colorDetails";
 
 const useStyles = createUseStyles({
@@ -44,7 +44,7 @@ export const Colors: React.FC = () => {
         <ColorDetails colors={loaded.colors} worlds={loaded.worlds} />
       </Route>
       <Route path="/colors/:wclass/:group/:region?">
-        <ColorViewer colors={loaded.colors} worlds={loaded.worlds} />
+        <ColorTable colors={loaded.colors} worlds={loaded.worlds} />
       </Route>
       <Route path="/">
         <Redirect to="/colors/main/rocks" />
