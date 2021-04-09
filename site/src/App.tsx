@@ -1,7 +1,6 @@
-import React from 'react';
-import './App.css';
+import React from "react";
 import { Switch, Route, Redirect, BrowserRouter } from "react-router-dom";
-import { Colors } from './colors';
+import { Colors } from "./colors";
 
 function App(): React.ReactElement {
   return <BrowserRouter>
@@ -13,7 +12,7 @@ function App(): React.ReactElement {
         <Redirect to="/colors/main/rocks" />
       </Route>
     </Switch>
-  </BrowserRouter>
+  </BrowserRouter>;
 }
 
 export default App;

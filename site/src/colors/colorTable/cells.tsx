@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
-import { ColorCell } from './cell';
-import { ColorEntry, WorldColors } from './data/types';
-import { columnsToDefs } from './grouping';
-import { ItemColumn } from './grouping/defs';
+import React, { useMemo } from "react";
+import { ColorCell } from "./cell";
+import { ColorEntry, WorldColors } from "../data/types";
+import { columnsToDefs } from "../grouping";
+import { ItemColumn } from "../grouping/defs";
 
 interface Props {
     columns: ItemColumn[];
@@ -18,5 +18,5 @@ export const ColorCells: React.FC<Props> = ({ columns, colors, blocks }) => {
         )
         , [columns, colors, blocks]);
 
-    return <>{colElems}</>
-}
+    return <>{colElems}</>;
+};

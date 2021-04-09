@@ -24,9 +24,12 @@ module.exports = {
     "react/prop-types": "off",
     "eqeqeq": "warn",
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "quotes": ["warn", "double"],
+    "semi": ["warn", "always"],
+    "comma-dangle": ["warn", "always-multiline"],
   },
   ignorePatterns: [
-    "**/*.css"
+    "**/*.css", "**/*.json"
   ]
 };
