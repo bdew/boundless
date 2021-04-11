@@ -36,6 +36,7 @@ export interface World {
     region: WorldRegion;
     is_public: boolean;
     is_locked: boolean;
+    image_url?: string;
 }
 
 export interface LocalizationEntry {

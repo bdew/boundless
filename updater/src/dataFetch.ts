@@ -32,7 +32,8 @@ export async function getWorlds(): Promise<WorldEntry[]> {
             region: world.region,
             type: world.world_type,
             tier: world.tier,
-            colors: Object.fromEntries(colorData.block_colors.map(e => [e.item.game_id.toString(), e.color.game_id]))
+            colors: Object.fromEntries(colorData.block_colors.map(e => [e.item.game_id.toString(), e.color.game_id])),
+            image: world.image_url || undefined,
         })
     }
 
