@@ -7,6 +7,7 @@ import { Content, Layout } from "../misc/layout";
 import { useLoadedData } from "./data/loader";
 import { ColorTable } from "./colorTable";
 import { ColorDetails } from "./colorDetails";
+import { PlanetDetails } from "./planetDetails";
 
 const useStyles = createUseStyles({
   loading: {
@@ -42,6 +43,9 @@ export const Colors: React.FC = () => {
     case "loaded": return <Switch>
       <Route path="/colors/details/:id">
         <ColorDetails colors={loaded.colors} worlds={loaded.worlds} />
+      </Route>
+      <Route path="/colors/planet/:id">
+        <PlanetDetails colors={loaded.colors} worlds={loaded.worlds} />
       </Route>
       <Route path="/colors/:wclass/:group/:region?">
         <ColorTable colors={loaded.colors} worlds={loaded.worlds} />

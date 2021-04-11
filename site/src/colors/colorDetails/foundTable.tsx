@@ -11,6 +11,7 @@ export interface FoundLocation {
 interface Props {
     locations: FoundLocation[];
     title: string;
+    showPlanet: (id: number) => void;
 }
 
 const useStyles = createUseStyles({
@@ -37,6 +38,10 @@ const useStyles = createUseStyles({
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
+        cursor: "pointer",
+        "&:hover": {
+            backgroundColor: "#eee",
+        },
     },
     worldTier: {
         textAlign: "center",
@@ -51,7 +56,7 @@ const useStyles = createUseStyles({
     },
 });
 
-export const FoundTable: React.FC<Props> = ({ locations, title }) => {
+export const FoundTable: React.FC<Props> = ({ locations, title, showPlanet }) => {
     const classes = useStyles();
 
     if (locations.length === 0) return null;
@@ -69,7 +74,7 @@ export const FoundTable: React.FC<Props> = ({ locations, title }) => {
         <tbody>
             {locations.map(loc => <tr key={`${loc.world.id}-${loc.item.id}`}>
                 <td className={classes.worldTier}>{loc.world.tier + 1}{loc.world.class === WorldClass.Exoworld ? "X" : ""}</td>
-                <td className={classes.worldName} title={loc.world.name}>{loc.world.name}</td>
+                <td className={classes.worldName} title={loc.world.name} onClick={() => showPlanet(loc.world.id)}>{loc.world.name}</td>
                 <td>{loc.world.type.toString().charAt(0).toUpperCase() + loc.world.type.toString().slice(1).toLowerCase()}</td>
                 <td>{loc.world.region.toUpperCase()}</td>
                 <td><div className={classes.item}><img src={itemImage(loc.item)} /><span>{loc.item.name}</span></div></td>

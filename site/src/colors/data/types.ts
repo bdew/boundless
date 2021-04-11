@@ -37,6 +37,7 @@ export interface WorldEntry {
     type: WorldType;
     region: WorldRegion;
     colors: WorldColors;
+    image?: string;
 }
 
 export interface DataJson {

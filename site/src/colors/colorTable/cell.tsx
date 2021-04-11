@@ -18,7 +18,7 @@ const useStyles = createUseStyles({
         whiteSpace: "nowrap",
         cursor: "pointer",
         "&:hover": {
-            border: "solid black 1px !important",
+            border: "solid black 1px",
         },
     },
     light: {

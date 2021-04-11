@@ -12,6 +12,7 @@ interface Props {
     colors: Map<number, ColorEntry>;
     worlds: WorldEntry[];
     colorDetails: (id: number) => void;
+    planetDetails: (id: number) => void;
     isFavorite: (id: number) => boolean;
     setFavorite: (id: number) => (v: boolean) => void;
 }
@@ -40,13 +41,17 @@ const useStyles = createUseStyles({
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
         borderRight: "none !important",
+        cursor: "pointer",
+        "&:hover": {
+            border: "solid black 1px !important",
+        },
     },
     worldTier: {
         textAlign: "center",
     },
 });
 
-export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails, isFavorite, setFavorite }) => {
+export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails, planetDetails, isFavorite, setFavorite }) => {
     const classes = useStyles();
     return <table className={classes.table}>
         <thead>
@@ -64,7 +69,7 @@ export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, 
         <tbody>
             {worlds.map(world => <tr key={world.id}>
                 <td className={classes.worldTier}>{world.tier + 1}{world.class === WorldClass.Exoworld ? "X" : ""}</td>
-                <td className={classes.worldName} title={world.name}>{world.name}</td>
+                <td className={classes.worldName} title={world.name} onClick={()=>planetDetails(world.id)}>{world.name}</td>
                 <FavCell favorite={isFavorite(world.id)} setFavorite={setFavorite(world.id)} />
                 <td>{world.type.toString().charAt(0).toUpperCase() + world.type.toString().slice(1).toLowerCase()}</td>
                 {!region && <td>{world.region.toUpperCase()}</td>}

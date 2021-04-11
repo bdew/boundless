@@ -11,6 +11,7 @@ interface Props {
 const useStyles = createUseStyles({
     box: {
         width: "8em",
+        minWidth: "8em",
         height: "8em",
         border: "solid black 1px",
         display: "flex",

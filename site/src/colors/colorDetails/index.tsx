@@ -56,6 +56,10 @@ export const ColorDetails: React.FC<Props> = ({ colors, worlds }) => {
         history.push(`/colors/details/${id}${back ? "?back=" + back : ""}`);
     }, [back, history]);
 
+    const showPlanet = useCallback((id: number) => {
+        history.push(`/colors/planet/${id}${back ? "?back=" + back : ""}`);
+    }, [back, history]);
+
     const [foundHome, foundExo, foundSov] = useMemo(() => {
         const foundHome: FoundLocation[] = [];
         const foundExo: FoundLocation[] = [];
@@ -110,9 +114,9 @@ export const ColorDetails: React.FC<Props> = ({ colors, worlds }) => {
                         </div>
                     </div>
                 </div>
-                <FoundTable locations={foundHome} title="Found on Home Planets:" />
-                <FoundTable locations={foundExo} title="Found on Exo Planets:" />
-                <FoundTable locations={foundSov} title="Found on Sovereign Planets:" />
+                <FoundTable locations={foundHome} title="Found on Home Planets:" showPlanet={showPlanet} />
+                <FoundTable locations={foundExo} title="Found on Exo Planets:" showPlanet={showPlanet} />
+                <FoundTable locations={foundSov} title="Found on Sovereign Planets:" showPlanet={showPlanet} />
             </Content>
         </Layout>
     </>;

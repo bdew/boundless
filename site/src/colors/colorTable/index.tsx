@@ -54,6 +54,10 @@ export const ColorTable: React.FC<Props> = ({ colors, worlds }) => {
         history.push(`/colors/details/${id}?back=/colors/${wclass}/${group}${region ? "/" + region : ""}`);
     }, [history, wclass, group, region]);
 
+    const planetDetails = useCallback((id: number) => {
+        history.push(`/colors/planet/${id}?back=/colors/${wclass}/${group}${region ? "/" + region : ""}`);
+    }, [history, wclass, group, region]);
+
     const columns = useMemo(() => {
         switch (group) {
             case "rocks": return RockColumns;
@@ -88,7 +92,7 @@ export const ColorTable: React.FC<Props> = ({ colors, worlds }) => {
                 />
             </Header>
             <Content>
-                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} isFavorite={isFavorite} setFavorite={setFavorite} />
+                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} planetDetails={planetDetails} isFavorite={isFavorite} setFavorite={setFavorite} />
             </Content>
         </Layout>
     </>;
