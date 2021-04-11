@@ -17,6 +17,9 @@ const useStyles = createUseStyles({
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
         cursor: "pointer",
+        "&:hover": {
+            border: "solid black 1px !important",
+        },
     },
     light: {
         color: "black",

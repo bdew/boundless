@@ -6,8 +6,9 @@ import { Switcher } from "../../misc/switcher";
 import { ColorsTable } from "./table";
 import { Header } from "../../misc/header";
 import { Layout, Content } from "../../misc/layout";
+import { useFavorites } from "./favorite";
 
-type DisplayClass = "main" | "sov";
+type DisplayClass = "main" | "sov" | "fav";
 type DisplayGroup = "rocks" | "soil" | "trees" | "plants" | "shrooms";
 
 interface Props {
@@ -24,20 +25,24 @@ interface Params {
 export const ColorTable: React.FC<Props> = ({ colors, worlds }) => {
     const { wclass, group, region } = useParams<Params>();
 
+    const { isFavorite, setFavorite } = useFavorites();
+
     const filtered = useMemo(() => {
         let data = worlds;
 
         if (wclass === "sov")
             data = data.filter(x => x.class === WorldClass.Sovereign);
-        else
+        else if (wclass === "main")
             data = data.filter(x => x.class === WorldClass.Homeworld || x.class === WorldClass.Exoworld);
+        else if (wclass === "fav")
+            data = data.filter(x => isFavorite(x.id));
 
         if (region) data = data.filter(x => x.region === region);
 
         data = data.sort((a, b) => (a.tier - b.tier) || a.name.localeCompare(b.name));
 
         return data;
-    }, [worlds, wclass, region]);
+    }, [worlds, wclass, region, isFavorite]);
 
     const history = useHistory();
 
@@ -79,11 +84,11 @@ export const ColorTable: React.FC<Props> = ({ colors, worlds }) => {
                     name="Class:"
                     value={wclass || "main"}
                     setValue={c => setDisplay(c, group, region)}
-                    options={[["main", "Home/Exo"], ["sov", "Sovereign"]]}
+                    options={[["main", "Home/Exo"], ["sov", "Sovereign"], ["fav", "Favorites"]]}
                 />
             </Header>
             <Content>
-                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} />
+                <ColorsTable colors={colors} worlds={filtered} region={region} columns={columns} colorDetails={colorDetails} isFavorite={isFavorite} setFavorite={setFavorite} />
             </Content>
         </Layout>
     </>;

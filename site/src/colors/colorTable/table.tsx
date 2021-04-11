@@ -4,19 +4,22 @@ import { ColorCells } from "./cells";
 import { ColorEntry, WorldClass, WorldEntry, WorldRegion } from "../data/types";
 import { ItemColumn } from "../grouping";
 import { ColumnHeaders, ColumnSubHeaders } from "./headers";
+import { FavCell } from "./favorite";
 
 interface Props {
     region?: WorldRegion;
     columns: ItemColumn[];
     colors: Map<number, ColorEntry>;
     worlds: WorldEntry[];
-    colorDetails: (id: number)=>void;
+    colorDetails: (id: number) => void;
+    isFavorite: (id: number) => boolean;
+    setFavorite: (id: number) => (v: boolean) => void;
 }
 
 const useStyles = createUseStyles({
     table: {
         tableLayout: "fixed",
-        fontSize: "0.75em",
+        fontSize: "0.8em",
         fontWeight: 500,
         borderSpacing: 0,
         cursor: "default",
@@ -36,19 +39,20 @@ const useStyles = createUseStyles({
         overflow: "hidden",
         textOverflow: "ellipsis",
         whiteSpace: "nowrap",
+        borderRight: "none !important",
     },
     worldTier: {
         textAlign: "center",
     },
 });
 
-export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails }) => {
+export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, colorDetails, isFavorite, setFavorite }) => {
     const classes = useStyles();
     return <table className={classes.table}>
         <thead>
             <tr>
                 <th className={classes.worldTier} rowSpan={2}>T</th>
-                <th className={classes.worldName} rowSpan={2}>World</th>
+                <th rowSpan={2} colSpan={2}>World</th>
                 <th rowSpan={2}>Type</th>
                 {!region && <th rowSpan={2}>Region</th>}
                 <ColumnHeaders columns={columns} />
@@ -61,6 +65,7 @@ export const ColorsTable: React.FC<Props> = ({ region, columns, colors, worlds, 
             {worlds.map(world => <tr key={world.id}>
                 <td className={classes.worldTier}>{world.tier + 1}{world.class === WorldClass.Exoworld ? "X" : ""}</td>
                 <td className={classes.worldName} title={world.name}>{world.name}</td>
+                <FavCell favorite={isFavorite(world.id)} setFavorite={setFavorite(world.id)} />
                 <td>{world.type.toString().charAt(0).toUpperCase() + world.type.toString().slice(1).toLowerCase()}</td>
                 {!region && <td>{world.region.toUpperCase()}</td>}
                 <ColorCells blocks={world.colors} colors={colors} columns={columns} colorDetails={colorDetails} />
