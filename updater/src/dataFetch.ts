@@ -20,8 +20,9 @@ export async function getWorlds(): Promise<WorldEntry[]> {
     for (const world of worlds) {
         bar.tick();
         if (!world.active || world.is_locked || world.world_class === WorldClass.Creative || world.region === WorldRegion.SANDBOX) continue;
-        const colorData: BlockColors = await fetchData(`https://api.boundlexx.app/api/v1/worlds/${world.id}/block-colors/`,
-            world.world_class === WorldClass.Exoworld ? WORLDS_EXO_TTL : world.world_class === WorldClass.Sovereign ? WORLDS_SOV_TTL : WORLDS_HOME_TTL);
+        const ttl = world.world_class === WorldClass.Exoworld ? WORLDS_EXO_TTL : world.world_class === WorldClass.Sovereign ? WORLDS_SOV_TTL : WORLDS_HOME_TTL;
+        const valid = world.world_class === WorldClass.Sovereign ? undefined : (e: BlockColors) => e.block_colors.length > 0;
+        const colorData: BlockColors = await fetchData(`https://api.boundlexx.app/api/v1/worlds/${world.id}/block-colors/`, ttl, valid);
         if (colorData.block_colors.length === 0) continue;
 
         result.push({

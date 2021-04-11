@@ -6,14 +6,18 @@ import { Paged } from './apiTypes';
 
 const DEBUG = false;
 
-export async function fetchData<T>(url: string, ttl: number): Promise<T> {
+export async function fetchData<T>(url: string, ttl: number, cacheValidate?: (data: T) => boolean): Promise<T> {
     const cachename = path.join('cache', url.replaceAll(/[/:?]/g, '-') + '.json');
     try {
         const stat = await fs.stat(cachename);
         if (new Date().getTime() - stat.mtime.getTime() < ttl) {
-            const data = await fs.readFile(cachename);
-            if (DEBUG) console.log(`CACHED: ${url}`);
-            return JSON.parse(data.toString('utf-8'));
+            const data = JSON.parse((await fs.readFile(cachename)).toString('utf-8'));
+            if (cacheValidate === undefined || cacheValidate(data)) {
+                if (DEBUG) console.log(`CACHED: ${url}`);
+                return data;
+            } else {
+                if (DEBUG) console.log(`INVALID: ${url}`);
+            }
         } else {
             if (DEBUG) console.log(`OLD: ${url}`)
         }
